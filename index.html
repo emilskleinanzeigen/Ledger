@@ -801,10 +801,56 @@
     .sheet{ border-radius:16px; border-bottom:1px solid var(--line); max-width:440px; padding:20px 22px 22px; }
     .sheet-grip{ display:none; }
   }
+  /* ---------- GREETING (shown on every app launch) ---------- */
+  #greet{
+    position:fixed; inset:0; z-index:100;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:24px; text-align:center; cursor:pointer;
+    background:
+      radial-gradient(640px 440px at 50% 44%, rgba(214,217,224,0.085), transparent 66%),
+      radial-gradient(1200px 800px at 90% -10%, rgba(210,213,220,0.05), transparent 60%),
+      var(--bg);
+    animation:greetOut .7s cubic-bezier(.4,0,.2,1) 2.4s forwards;
+  }
+  #greet.skip{ animation:greetOut .35s ease forwards; }
+  .greet-hello{
+    font-family:'Fraunces', serif; font-weight:600;
+    font-size:clamp(46px, 14vw, 88px); line-height:1.04; letter-spacing:-0.01em;
+    background:linear-gradient(180deg, #ffffff 0%, #e4e5e9 48%, #9a9ca3 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    opacity:0; transform:translateY(14px); filter:blur(6px);
+    animation:greetIn 1s cubic-bezier(.2,.7,.2,1) .15s forwards;
+  }
+  .greet-line{
+    width:0; height:1px; margin:24px auto 22px;
+    background:linear-gradient(90deg, transparent, var(--silver-lo), transparent);
+    animation:greetLine .9s ease .75s forwards;
+  }
+  .greet-sub{
+    font-family:'Inter', sans-serif; font-size:12.5px; font-weight:500;
+    letter-spacing:0.34em; padding-left:0.34em; text-transform:uppercase;
+    color:var(--silver-lo);
+    opacity:0; transform:translateY(8px);
+    animation:greetIn .8s cubic-bezier(.2,.7,.2,1) .95s forwards;
+  }
+  @keyframes greetIn{ to{ opacity:1; transform:none; filter:none; } }
+  @keyframes greetLine{ to{ width:min(180px, 42vw); } }
+  @keyframes greetOut{ to{ opacity:0; visibility:hidden; transform:scale(1.03); } }
+  @media (prefers-reduced-motion: reduce){
+    .greet-hello, .greet-sub{ animation:none; opacity:1; transform:none; filter:none; }
+    .greet-line{ animation:none; width:min(180px, 42vw); }
+    #greet{ animation:greetOut .3s ease 1.6s forwards; }
+  }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+
+<div id="greet" role="status" aria-live="polite" title="Tap to continue">
+  <div class="greet-hello">Hello Emil</div>
+  <div class="greet-line" aria-hidden="true"></div>
+  <div class="greet-sub">Let’s get to work</div>
+</div>
 
 <div class="app">
   <div class="spine">
@@ -2286,6 +2332,16 @@
   }
   // Ask the browser to keep this app's data even when the phone is low on space
   try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist(); }catch(e){}
+
+  /* ---------- GREETING: tap to skip, removed once it has faded out ---------- */
+  (function(){
+    const g = document.getElementById('greet');
+    if(!g) return;
+    const remove = ()=>{ if(g.isConnected) g.remove(); };
+    g.addEventListener('click', ()=> g.classList.add('skip'));
+    g.addEventListener('animationend', e => { if(e.target === g && e.animationName === 'greetOut') remove(); });
+    setTimeout(remove, 3800);   // safety net if animations are paused
+  })();
 
   init();
 })();
