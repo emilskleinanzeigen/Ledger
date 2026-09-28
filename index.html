@@ -801,6 +801,95 @@
     .sheet{ border-radius:16px; border-bottom:1px solid var(--line); max-width:440px; padding:20px 22px 22px; }
     .sheet-grip{ display:none; }
   }
+  /* ---------- FILES IN JOURNALS ---------- */
+  .page-action:disabled{ opacity:0.5; cursor:default; filter:none; }
+  .files{ margin-top:36px; border-radius:14px; transition:background .15s ease; }
+  .files.busy{ opacity:0.6; pointer-events:none; }
+  .files.drag{ background:rgba(255,255,255,0.025); outline:1px dashed var(--silver-lo); outline-offset:8px; }
+  .files-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+  .files-head .section-label{ margin:0; }
+  .file-drop{
+    display:block; width:100%; cursor:pointer;
+    border:1px dashed var(--line); border-radius:12px; background:transparent;
+    padding:20px 18px; text-align:center; color:var(--muted);
+    font-family:'Inter', sans-serif; font-size:13px; line-height:1.55;
+  }
+  .file-drop:hover{ border-color:var(--silver-lo); color:var(--paper); }
+  .file-list{ display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:10px; }
+  .file-card{
+    display:flex; align-items:center; gap:12px; min-width:0; cursor:pointer;
+    padding:11px 8px 11px 11px; border-radius:12px; border:1px solid var(--line);
+    background:linear-gradient(160deg, #18181c, #0e0e10);
+    transition:border-color .15s ease;
+  }
+  .file-card:hover{ border-color:var(--silver-lo); }
+  .file-thumb{
+    width:44px; height:44px; flex-shrink:0; border-radius:9px; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--panel-raised); border:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace; font-size:10px; font-weight:600; letter-spacing:0.06em; color:var(--gold);
+  }
+  .file-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .file-main{ flex:1; min-width:0; }
+  .file-name{ font-size:13.5px; color:var(--paper); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .file-meta{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--muted); margin-top:4px; }
+
+  /* ---------- QUICK SHEET ---------- */
+  .q-card{ border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:18px; margin-bottom:16px; }
+  .q-label{ font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:12px; }
+  .q-add{ display:flex; gap:8px; }
+  .q-add input{
+    flex:1; min-width:0;
+    background:var(--bg); border:1px solid var(--line); border-radius:9px;
+    color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:14px;
+    padding:10px 12px; outline:none; text-transform:uppercase;
+  }
+  .q-add input::placeholder{ text-transform:none; color:var(--muted); }
+  .q-add input:focus{ border-color:var(--gold); }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .chip{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    padding:6px 8px 6px 12px; border-radius:999px;
+    border:1px solid var(--line-warm); background:var(--panel-raised); color:var(--paper);
+  }
+  .chip button{ background:none; border:none; color:var(--muted); cursor:pointer; font-size:15px; line-height:1; padding:0 3px; }
+  .chip button:hover{ color:var(--rust); }
+  .chip.suggest{ background:transparent; border-style:dashed; color:var(--muted); cursor:pointer; padding:6px 12px; }
+  .chip.suggest:hover{ color:var(--paper); border-color:var(--silver-lo); }
+  .q-sub{ font-size:11.5px; color:var(--muted); margin-top:16px; }
+  .q-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .q-status{ font-size:12.5px; color:var(--muted); margin-top:12px; line-height:1.5; }
+  .q-status:empty{ display:none; }
+  .q-status.ok{ color:var(--sage); }
+  .q-status.err{ color:var(--rust); }
+  .q-title{
+    width:100%; background:transparent; border:none; border-bottom:1px solid var(--line);
+    color:var(--paper); font-family:'Fraunces', serif; font-size:19px; padding:6px 2px; outline:none;
+  }
+  .q-title:focus{ border-color:var(--gold); }
+  .q-table{ width:100%; border-collapse:collapse; font-family:'IBM Plex Mono', monospace; font-size:13px; }
+  .q-table th{ font-family:'Inter', sans-serif; font-size:10px; font-weight:500; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-align:left; padding:0 8px 8px; }
+  .q-table td{ padding:8px; border-top:1px solid rgba(255,255,255,0.05); vertical-align:middle; }
+  .q-table td.t{ font-family:'Fraunces', serif; font-size:16px; color:var(--paper); }
+  .q-table td.dt{ color:var(--muted); font-size:11px; }
+  .q-table td.err{ color:var(--rust); font-family:'Inter', sans-serif; font-size:11.5px; white-space:normal; }
+  .q-open{
+    width:110px; background:var(--bg); border:1px solid var(--line); border-radius:7px;
+    color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:13px;
+    padding:7px 9px; text-align:right; outline:none;
+  }
+  .q-open:focus{ border-color:var(--gold); }
+  @media (max-width:720px){
+    .nav{ overflow-x:auto; scrollbar-width:none; }
+    .nav::-webkit-scrollbar{ display:none; }
+    .nav-item{ flex-shrink:0; }
+    .file-list{ grid-template-columns:1fr; }
+    .hint-desktop{ display:none; }
+    .q-card{ padding:16px; }
+    .q-open{ width:96px; }
+  }
+
   /* ---------- GREETING (shown on every app launch) ---------- */
   #greet{
     position:fixed; inset:0; z-index:100;
@@ -1007,6 +1096,12 @@
     edit: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
     move: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H9l2 2.2h7.5A2.5 2.5 0 0 1 21 9.7v7.8a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5z"/><path d="M9.5 13.5h6M13 11l2.5 2.5L13 16"/></svg>',
     trash: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/></svg>',
+    bolt: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5L4.5 13.5H11l-1 8 8.5-11H12z"/></svg>',
+    clip: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.5l-8.6 8.6a5 5 0 0 1-7.1-7.1l8.9-8.9a3.4 3.4 0 0 1 4.8 4.8l-8.9 8.9a1.7 1.7 0 0 1-2.4-2.4l8.2-8.2"/></svg>',
+    download: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>',
+    copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>',
+    share: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v6.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V12"/></svg>',
+    file: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>',
   };
 
   // Build DOM without innerHTML for anything the user typed
@@ -1148,6 +1243,400 @@
   }
   function entryCount(id){ return (entriesCache[id] || []).length; }
 
+  /* ---------- FILE ATTACHMENTS (stored in IndexedDB: plenty of room for PDFs) ---------- */
+  const FILES_DB = 'ledger-files';
+  const MAX_FILE = 100 * 1024 * 1024;
+  let filesDbPromise = null;
+  let fileMeta = [];                 // { id, journalId, name, type, size, addedAt }
+  const thumbCache = new Map();      // fileId -> object URL for image previews
+
+  function filesDb(){
+    if(!filesDbPromise){
+      filesDbPromise = new Promise((resolve, reject) => {
+        if(!('indexedDB' in window) || !window.indexedDB){ reject(new Error('This browser can’t store files.')); return; }
+        const req = indexedDB.open(FILES_DB, 1);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if(!db.objectStoreNames.contains('meta')) db.createObjectStore('meta', { keyPath:'id' });
+          if(!db.objectStoreNames.contains('blobs')) db.createObjectStore('blobs');
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error || new Error('Could not open file storage.'));
+      });
+      filesDbPromise.catch(()=>{ filesDbPromise = null; });
+    }
+    return filesDbPromise;
+  }
+  function reqP(req){ return new Promise((res, rej) => { req.onsuccess = () => res(req.result); req.onerror = () => rej(req.error); }); }
+  function txDone(tx){ return new Promise((res, rej) => { tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); tx.onabort = () => rej(tx.error || new Error('Saving was cancelled.')); }); }
+
+  async function loadFileMeta(){
+    try{ const db = await filesDb(); fileMeta = await reqP(db.transaction('meta').objectStore('meta').getAll()); }
+    catch(e){ fileMeta = []; }
+  }
+  function filesOf(journalId){ return fileMeta.filter(m => m.journalId === journalId).sort((a, b) => b.addedAt - a.addedAt); }
+  async function addFiles(journalId, list){
+    const db = await filesDb();
+    const added = [];
+    for(const f of list){
+      const meta = { id: uid(), journalId, name: f.name || 'file', type: f.type || '', size: f.size || 0, addedAt: Date.now() };
+      const tx = db.transaction(['meta', 'blobs'], 'readwrite');
+      tx.objectStore('blobs').put(f, meta.id);
+      tx.objectStore('meta').put(meta);
+      await txDone(tx);
+      fileMeta.push(meta);
+      added.push(meta);
+    }
+    return added;
+  }
+  async function getFileBlob(id){ const db = await filesDb(); return reqP(db.transaction('blobs').objectStore('blobs').get(id)); }
+  async function deleteFileIds(ids){
+    if(!ids.length) return;
+    const db = await filesDb();
+    const tx = db.transaction(['meta', 'blobs'], 'readwrite');
+    ids.forEach(id => { tx.objectStore('meta').delete(id); tx.objectStore('blobs').delete(id); });
+    await txDone(tx);
+    const gone = new Set(ids);
+    fileMeta = fileMeta.filter(m => !gone.has(m.id));
+    ids.forEach(id => { if(thumbCache.has(id)){ URL.revokeObjectURL(thumbCache.get(id)); thumbCache.delete(id); } });
+  }
+  function removeFilesOf(journalIds){
+    const ids = fileMeta.filter(m => journalIds.includes(m.journalId)).map(m => m.id);
+    if(ids.length) deleteFileIds(ids).catch(e => console.error('Removing files failed', e));
+  }
+  async function renameFileMeta(m, name){
+    const db = await filesDb();
+    const tx = db.transaction('meta', 'readwrite');
+    m.name = name;
+    tx.objectStore('meta').put(m);
+    await txDone(tx);
+  }
+  function fmtBytes(n){
+    if(!isFinite(n)) return '';
+    if(n < 1024) return n + ' B';
+    if(n < 1048576) return Math.round(n / 1024) + ' KB';
+    return (n / 1048576).toFixed(n < 10485760 ? 1 : 0) + ' MB';
+  }
+  function downloadBlob(blob, name){
+    const url = URL.createObjectURL(blob);
+    const a = el('a', { href:url, download:name });
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(()=> URL.revokeObjectURL(url), 15000);
+  }
+  async function typedBlob(m){
+    const blob = await getFileBlob(m.id);
+    if(!blob) throw new Error('This file couldn’t be found on this device.');
+    return blob.type ? blob : new Blob([blob], { type: m.type || 'application/octet-stream' });
+  }
+  async function openFile(m){
+    try{
+      const blob = await typedBlob(m);
+      const url = URL.createObjectURL(blob);
+      const win = window.open(url, '_blank');
+      if(!win) downloadBlob(blob, m.name);
+      setTimeout(()=> URL.revokeObjectURL(url), 60000);
+    }catch(e){ showToast('Couldn’t open the file: ' + (e.message || 'unknown error')); }
+  }
+  async function fileMenu(m){
+    const canShare = !!(navigator.share && navigator.canShare);
+    const v = await uiMenu(m.name, [
+      { label:'Open', value:'open', icon:'file' },
+      { label:'Download', value:'download', icon:'download' },
+      canShare ? { label:'Share / open with…', value:'share', icon:'share' } : null,
+      { label:'Rename', value:'rename', icon:'edit' },
+      { label:'Delete file', value:'delete', icon:'trash', danger:true },
+    ].filter(Boolean), `${fmtBytes(m.size)} · added ${fmtDate(m.addedAt)}`);
+    try{
+      if(v === 'open') return openFile(m);
+      if(v === 'download') return downloadBlob(await typedBlob(m), m.name);
+      if(v === 'share'){
+        const blob = await typedBlob(m);
+        const file = new File([blob], m.name, { type: blob.type });
+        if(navigator.canShare({ files:[file] })) await navigator.share({ files:[file], title:m.name });
+        else downloadBlob(blob, m.name);
+        return;
+      }
+      if(v === 'rename'){
+        const name = await uiPrompt('Rename file', m.name);
+        if(!name) return;
+        await renameFileMeta(m, name);
+        return renderAll();
+      }
+      if(v === 'delete'){
+        if(!(await uiConfirm(`Delete “${m.name}”?`, 'The file will be removed from this journal.', 'Delete file'))) return;
+        await deleteFileIds([m.id]);
+        showToast('File deleted', 'ok');
+        return renderAll();
+      }
+    }catch(e){
+      if(e && e.name === 'AbortError') return;       // share sheet closed
+      showToast('Something went wrong: ' + (e.message || 'unknown error'));
+    }
+  }
+  function fileThumb(m){
+    const box = el('div', { class:'file-thumb' });
+    if((m.type || '').startsWith('image/')){
+      const img = el('img', { alt:'' });
+      box.appendChild(img);
+      if(thumbCache.has(m.id)) img.src = thumbCache.get(m.id);
+      else getFileBlob(m.id).then(b => { if(!b) return; const u = URL.createObjectURL(b); thumbCache.set(m.id, u); img.src = u; }).catch(()=>{});
+    }else{
+      const ext = m.name.includes('.') ? m.name.split('.').pop().toUpperCase() : '';
+      box.textContent = m.type === 'application/pdf' ? 'PDF' : (ext && ext.length <= 4 ? ext : 'FILE');
+    }
+    return box;
+  }
+  function fileCard(m){
+    return el('div', { class:'file-card', role:'button', tabindex:'0', 'data-id': m.id, onclick: ()=> openFile(m), onkeydown: activateOnEnter },
+      fileThumb(m),
+      el('div', { class:'file-main' }, el('div', { class:'file-name', text:m.name }), el('div', { class:'file-meta', text: fmtBytes(m.size) + ' · ' + fmtDate(m.addedAt) })),
+      moreBtn(()=> fileMenu(m), 'File options'));
+  }
+  async function attachFiles(page, list, sec){
+    const tooBig = list.filter(f => f.size > MAX_FILE);
+    const ok = list.filter(f => f.size <= MAX_FILE);
+    if(tooBig.length) showToast(`${tooBig[0].name} is larger than 100 MB and was skipped.`);
+    if(!ok.length) return;
+    if(sec) sec.classList.add('busy');
+    try{
+      const added = await addFiles(page.id, ok);
+      showToast(added.length === 1 ? `Added ${added[0].name}` : `Added ${added.length} files`, 'ok');
+    }catch(e){
+      console.error('Adding files failed', e);
+      showToast(e && e.name === 'QuotaExceededError' ? 'Not enough storage space on this device for that file.' : 'Couldn’t save the file: ' + ((e && e.message) || 'unknown error'));
+    }finally{
+      if(sec) sec.classList.remove('busy');
+      renderAll();
+    }
+  }
+  function filesSection(page){
+    const list = filesOf(page.id);
+    const sec = el('div', { class:'files' });
+    const input = el('input', { type:'file', multiple:true, style:'display:none', 'data-role':'file-input' });
+    input.addEventListener('change', ()=>{ const picked = [...input.files]; input.value = ''; if(picked.length) attachFiles(page, picked, sec); });
+    sec.appendChild(el('div', { class:'files-head' },
+      el('div', { class:'section-label', text: list.length ? `Files · ${list.length}` : 'Files' }),
+      actionBtn('Add file', 'clip', ()=> input.click())));
+    sec.appendChild(input);
+    if(list.length) sec.appendChild(el('div', { class:'file-list' }, list.map(fileCard)));
+    else sec.appendChild(el('button', { class:'file-drop', type:'button', onclick: ()=> input.click() },
+      'Add PDFs, screenshots or any other file to this journal. ', el('span', { class:'hint-desktop', text:'You can also drop files here.' })));
+    const hasFiles = e => e.dataTransfer && [...e.dataTransfer.types].includes('Files');
+    ['dragenter', 'dragover'].forEach(t => sec.addEventListener(t, e => { if(hasFiles(e)){ e.preventDefault(); sec.classList.add('drag'); } }));
+    sec.addEventListener('dragleave', e => { if(!sec.contains(e.relatedTarget)) sec.classList.remove('drag'); });
+    sec.addEventListener('drop', e => {
+      if(!hasFiles(e)) return;
+      e.preventDefault();
+      sec.classList.remove('drag');
+      const dropped = [...e.dataTransfer.files];
+      if(dropped.length) attachFiles(page, dropped, sec);
+    });
+    return sec;
+  }
+
+  /* ---------- QUICK SHEET (opening prices only — not saved, just downloadable) ---------- */
+  const QUICK_TICKERS_KEY = 'stock-journal-quick-tickers';
+  const quick = { title:'', tickers:[], rows:{}, loading:false, status:'', statusKind:'' };
+  function loadQuickTickers(){
+    try{ const raw = localStorage.getItem(QUICK_TICKERS_KEY); quick.tickers = raw ? JSON.parse(raw) : []; }
+    catch(e){ quick.tickers = []; }
+  }
+  function saveQuickTickers(){ try{ localStorage.setItem(QUICK_TICKERS_KEY, JSON.stringify(quick.tickers)); }catch(e){} }
+  function knownTickers(){
+    const s = new Set();
+    Object.values(entriesCache).forEach(list => (list || []).forEach(e => { const k = (e.name || '').trim().toUpperCase(); if(k) s.add(k); }));
+    return [...s].sort();
+  }
+  function addQuickTickers(text){
+    const parts = String(text || '').toUpperCase().split(/[\s,;]+/).filter(s => /^[A-Z0-9.\-\/:^]{1,15}$/.test(s));
+    let added = 0;
+    parts.forEach(t => { if(!quick.tickers.includes(t)){ quick.tickers.push(t); added++; } });
+    if(added) saveQuickTickers();
+    return added;
+  }
+  function setQuickStatus(msg, kind){
+    quick.status = msg || '';
+    quick.statusKind = kind || '';
+    const s = document.getElementById('qStatus');
+    if(s){ s.textContent = quick.status; s.className = 'q-status' + (quick.statusKind ? ' ' + quick.statusKind : ''); }
+  }
+  function cleanApiMsg(m){
+    m = String(m || '').replace(/\*\*|`/g, '').trim();
+    if(/symbol/i.test(m) && /(invalid|not found|missing)/i.test(m)) return 'Ticker not found on Twelve Data.';
+    if(/apikey|api key/i.test(m)) return 'Your API key isn’t valid — check it with the 🔑 button in “Add stock”.';
+    return m;
+  }
+  function shortMsg(m, n = 160){ m = cleanApiMsg(m); return m.length > n ? m.slice(0, n) + '…' : m; }
+  async function ensureApiKey(){
+    const key = await getApiKey();
+    if(key) return key;
+    const v = await uiPrompt('Twelve Data API key', '', { message:'Needed once to fetch prices. You find it in your Twelve Data dashboard.', placeholder:'Paste your API key', confirm:'Save key' });
+    if(!v) return null;
+    await setApiKey(v);
+    return v;
+  }
+  async function fetchQuickOpens(){
+    if(quick.loading) return;
+    if(!quick.tickers.length){ setQuickStatus('Add at least one ticker first.', 'err'); return; }
+    const key = await ensureApiKey();
+    if(!key){ setQuickStatus('An API key is needed to fetch prices.', 'err'); return; }
+    const syms = quick.tickers.slice();
+    quick.loading = true;
+    quick.status = 'Fetching opening prices…'; quick.statusKind = '';
+    if(view.type === 'quick') renderMain();
+    try{
+      for(let i = 0; i < syms.length; i += 8){                 // free plan: 8 prices per minute
+        if(i > 0){
+          for(let s = 61; s > 0; s--){ setQuickStatus(`Free plan limit — next ${Math.min(8, syms.length - i)} in ${s}s…`); await new Promise(r => setTimeout(r, 1000)); }
+          setQuickStatus('Fetching opening prices…');
+        }
+        const chunk = syms.slice(i, i + 8);
+        const url = 'https://api.twelvedata.com/time_series?symbol=' + encodeURIComponent(chunk.join(','))
+          + '&interval=1day&outputsize=1&apikey=' + encodeURIComponent(key);
+        let data;
+        try{ const res = await fetch(url); data = await res.json(); }
+        catch(e){ throw new Error('Couldn’t reach the data service. Check your internet connection.'); }
+        if(!data) throw new Error('No data returned.');
+        const single = chunk.length === 1;
+        if(data.status === 'error' && (!single || [401, 403, 429].includes(data.code))) throw new Error(shortMsg(data.message || 'The data service returned an error.'));
+        const bySym = single ? { [chunk[0]]: data } : data;
+        chunk.forEach(sym => {
+          const d = bySym[sym];
+          if(!d || d.status === 'error' || !Array.isArray(d.values) || !d.values.length){
+            quick.rows[sym] = { open:null, date:null, error: d && d.message ? shortMsg(d.message, 70) : 'No data for this ticker' };
+            return;
+          }
+          const v = d.values[0], o = parseFloat(v.open);
+          quick.rows[sym] = { open: isFinite(o) ? Number(o.toFixed(2)) : null, date: String(v.datetime).slice(0, 10), error:null };
+        });
+      }
+      const today = new Date().toLocaleDateString('en-CA');
+      const got = syms.filter(s => quick.rows[s] && quick.rows[s].open !== null);
+      let msg = `✓ Loaded ${got.length} of ${syms.length} opening ${syms.length === 1 ? 'price' : 'prices'}.`;
+      if(got.some(s => quick.rows[s].date !== today)) msg += ' Some are from the last trading day — today’s session hasn’t opened yet for those.';
+      quick.status = msg; quick.statusKind = got.length ? 'ok' : 'err';
+    }catch(e){
+      quick.status = 'Couldn’t fetch prices: ' + e.message; quick.statusKind = 'err';
+    }finally{
+      quick.loading = false;
+      if(view.type === 'quick') renderMain();
+    }
+  }
+  function quickText(){
+    const lines = [quick.title || 'Opening prices'];
+    quick.tickers.forEach(t => {
+      const r = quick.rows[t];
+      lines.push(r && r.open !== null && r.open !== undefined
+        ? `${t}: ${r.open.toFixed(2)}${r.date ? ' (' + fmtDate(r.date + 'T12:00:00') + ')' : ''}`
+        : `${t}: —`);
+    });
+    return lines.join('\n');
+  }
+  async function copyQuick(){
+    const text = quickText();
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast('Copied to clipboard', 'ok');
+    }catch(e){
+      const ta = el('textarea', { style:'position:fixed;top:0;left:0;opacity:0' });
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try{ ok = document.execCommand('copy'); }catch(_){}
+      ta.remove();
+      showToast(ok ? 'Copied to clipboard' : 'Copying isn’t available here', ok ? 'ok' : null);
+    }
+  }
+  function quickPdf(){
+    if(!window.jspdf){ showToast('The PDF tool is still loading — try again in a moment.'); return; }
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit:'pt', format:'a4' });
+    const W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight(), mx = 48;
+    let y = 64;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(20);
+    doc.text(doc.splitTextToSize(quick.title || 'Opening prices', W - mx * 2)[0], mx, y);
+    y += 16;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(120);
+    doc.text('Opening prices · created ' + new Date().toLocaleString(), mx, y);
+    y += 30;
+    doc.setFontSize(8.5);
+    doc.text('TICKER', mx, y); doc.text('OPEN', mx + 230, y, { align:'right' }); doc.text('SESSION', mx + 262, y);
+    doc.setTextColor(0);
+    y += 8; doc.setDrawColor(200); doc.line(mx, y, W - mx, y); y += 20;
+    quick.tickers.forEach(t => {
+      if(y > H - 60){ doc.addPage(); y = 64; }
+      const r = quick.rows[t] || {};
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(12); doc.text(t, mx, y);
+      doc.setFont('courier', 'normal'); doc.setFontSize(11.5);
+      doc.text(r.open !== null && r.open !== undefined ? r.open.toFixed(2) : '-', mx + 230, y, { align:'right' });
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(110);
+      doc.text(r.date ? fmtDate(r.date + 'T12:00:00') : (r.error ? 'no data' : 'not fetched'), mx + 262, y);
+      doc.setTextColor(0);
+      y += 8; doc.setDrawColor(235); doc.line(mx, y, W - mx, y); y += 18;
+    });
+    doc.save(`ledger-${slugify(quick.title || 'opening prices')}.pdf`);
+  }
+  function renderQuick(){
+    if(!quick.title) quick.title = 'Opening prices — ' + fmtDate(Date.now());
+    mainEl.appendChild(headerBlock('Quick sheet', 'Opening prices only · not saved — download or copy when you’re done', []));
+
+    const input = el('input', { type:'text', placeholder:'Add tickers, e.g. NVDA, MU', autocapitalize:'characters', autocomplete:'off', spellcheck:'false', 'aria-label':'Tickers to add' });
+    const add = ()=>{
+      const n = addQuickTickers(input.value);
+      input.value = '';
+      if(n) renderMain().then(()=>{ const i = mainEl.querySelector('.q-add input'); if(i) i.focus(); });
+    };
+    input.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); add(); } });
+    const chips = quick.tickers.length ? el('div', { class:'chips' }, quick.tickers.map(t =>
+      el('span', { class:'chip', 'data-ticker':t }, t,
+        el('button', { type:'button', 'aria-label':'Remove ' + t, text:'×', onclick: ()=>{
+          quick.tickers = quick.tickers.filter(x => x !== t); delete quick.rows[t]; saveQuickTickers(); renderMain();
+        } })))) : null;
+    const known = knownTickers().filter(t => !quick.tickers.includes(t)).slice(0, 16);
+    const suggest = known.length ? el('div', null,
+      el('div', { class:'q-sub', text:'From your journals' }),
+      el('div', { class:'chips' }, known.map(t => el('button', { class:'chip suggest', type:'button', 'data-suggest':t, text:'+ ' + t, onclick: ()=>{ addQuickTickers(t); renderMain(); } })))) : null;
+
+    mainEl.appendChild(el('div', { class:'q-card' },
+      el('div', { class:'q-label', text:'Stocks' }),
+      el('div', { class:'q-add' }, input, actionBtn('Add', 'plus', add)),
+      chips, suggest,
+      el('div', { class:'q-actions' },
+        el('button', { class:'page-action primary', type:'button', 'data-role':'fetch', disabled: quick.loading || !quick.tickers.length, onclick: fetchQuickOpens },
+          icon('bolt'), el('span', { text: quick.loading ? 'Fetching…' : 'Fetch opening prices' })),
+        quick.tickers.length && !quick.loading ? actionBtn('Clear all', null, ()=>{ quick.tickers = []; quick.rows = {}; saveQuickTickers(); quick.status = ''; quick.statusKind = ''; renderMain(); }) : null),
+      el('div', { id:'qStatus', class:'q-status' + (quick.statusKind ? ' ' + quick.statusKind : ''), text: quick.status })));
+
+    if(!quick.tickers.length) return;
+    const title = el('input', { class:'q-title', type:'text', maxlength:'80', 'aria-label':'Sheet name' });
+    title.value = quick.title;
+    title.addEventListener('input', ()=>{ quick.title = title.value; });
+    const rows = quick.tickers.map(t => {
+      const r = quick.rows[t] || null;
+      const openInput = el('input', { class:'q-open', type:'number', step:'0.01', inputmode:'decimal', placeholder:'—', 'aria-label': t + ' opening price' });
+      if(r && r.open !== null && r.open !== undefined) openInput.value = Number(r.open).toFixed(2);
+      openInput.addEventListener('input', ()=>{
+        quick.rows[t] = Object.assign({ date:null, error:null }, quick.rows[t] || {}, { open: numOrNull(openInput.value) });
+      });
+      const note = r && r.error ? el('td', { class:'err', text:r.error })
+                                : el('td', { class:'dt', text: r && r.date ? fmtDate(r.date + 'T12:00:00') : 'not fetched yet' });
+      return el('tr', { 'data-ticker':t }, el('td', { class:'t', text:t }), el('td', null, openInput), note);
+    });
+    mainEl.appendChild(el('div', { class:'q-card' },
+      el('div', { class:'q-label', text:'Sheet' }),
+      title,
+      el('div', { class:'cmp-scroll', style:'margin-top:14px' },
+        el('table', { class:'q-table' },
+          el('thead', null, el('tr', null, el('th', { text:'Ticker' }), el('th', { text:'Open' }), el('th', { text:'Session' }))),
+          el('tbody', null, rows))),
+      el('div', { class:'q-actions' },
+        actionBtn('Download PDF', 'download', quickPdf, 'primary'),
+        actionBtn('Copy as text', 'copy', copyQuick))));
+  }
+
   /* ---------- LIBRARY ACTIONS ---------- */
   async function createFolder(){
     const name = await uiPrompt('New folder', '', { placeholder:'e.g. September, Tech stocks', confirm:'Create' });
@@ -1178,6 +1667,7 @@
     if(!choice) return;
     if(choice === 'all'){
       inside.forEach(p => { store.del(entriesKey(p.id)); delete entriesCache[p.id]; });
+      removeFilesOf(inside.map(p => p.id));
       pages = pages.filter(p => p.folderId !== f.id);
     }else{
       pages.forEach(p => { if(p.folderId === f.id) p.folderId = null; });
@@ -1238,6 +1728,7 @@
     savePages();
     store.del(entriesKey(p.id));
     delete entriesCache[p.id];
+    removeFilesOf([p.id]);
     if(view.type === 'journal' && view.id === p.id){
       go(p.folderId && folderById(p.folderId) ? { type:'folder', id:p.folderId } : { type:'library' }, true);
     }else renderAll();
@@ -1271,13 +1762,15 @@
       const s = q.toString();
       return '#/compare' + (s ? '?' + s : '');
     }
+    if(v.type === 'quick') return '#/quick';
     return '#/library';
   }
   function parseHash(hash){
-    const m = /^#\/(library|journal|folder|compare)(?:\/([^?]+))?(?:\?(.*))?$/.exec(hash || '');
+    const m = /^#\/(library|journal|folder|compare|quick)(?:\/([^?]+))?(?:\?(.*))?$/.exec(hash || '');
     if(!m) return null;
     if(m[1] === 'journal' || m[1] === 'folder') return m[2] ? { type:m[1], id: decodeURIComponent(m[2]) } : null;
     if(m[1] === 'compare'){ const q = new URLSearchParams(m[3] || ''); return { type:'compare', a:q.get('a'), b:q.get('b') }; }
+    if(m[1] === 'quick') return { type:'quick' };
     return { type:'library' };
   }
   function normalizeView(v){
@@ -1315,11 +1808,12 @@
 
   /* ---------- SIDEBAR ---------- */
   function renderSidebar(){
+    const navBtn = (key, label, ic, target, active) =>
+      el('button', { class:'nav-item' + (active ? ' active' : ''), type:'button', 'data-nav':key, onclick: ()=> go(target) }, icon(ic), el('span', { text:label }));
     navEl.replaceChildren(
-      el('button', { class:'nav-item' + (view.type !== 'compare' ? ' active' : ''), type:'button', 'data-nav':'library', onclick: ()=> go({ type:'library' }) },
-        icon('library'), el('span', { text:'Library' })),
-      el('button', { class:'nav-item' + (view.type === 'compare' ? ' active' : ''), type:'button', 'data-nav':'compare', onclick: ()=> go({ type:'compare', a:lastCompare.a, b:lastCompare.b }) },
-        icon('compare'), el('span', { text:'Compare' })));
+      navBtn('library', 'Library', 'library', { type:'library' }, !['compare', 'quick'].includes(view.type)),
+      navBtn('compare', 'Compare', 'compare', { type:'compare', a:lastCompare.a, b:lastCompare.b }, view.type === 'compare'),
+      navBtn('quick', 'Quick sheet', 'bolt', { type:'quick' }, view.type === 'quick'));
 
     const out = [];
     const fs = sortedFolders();
@@ -1514,7 +2008,7 @@
       throw new Error('Couldn\'t reach the data service. Check your internet connection.');
     }
     if(!data || data.status === 'error' || !Array.isArray(data.values)){
-      const msg = (data && data.message) ? data.message : 'No data returned for this ticker.';
+      const msg = (data && data.message) ? cleanApiMsg(data.message) : 'No data returned for this ticker.';
       throw new Error(msg.length > 180 ? msg.slice(0, 180) + '…' : msg);
     }
     const bars = data.values.map(v => ({
@@ -1988,7 +2482,7 @@
       el('div', { class:'j-icon', html: ICON.journal }),
       el('div', { class:'j-main' },
         el('div', { class:'j-name', text:p.name }),
-        el('div', { class:'j-meta', text: plural(ents.length, 'stock', 'stocks') + ' · ' + fmtDate(p.createdAt) }),
+        el('div', { class:'j-meta', text: [plural(ents.length, 'stock', 'stocks'), filesOf(p.id).length ? plural(filesOf(p.id).length, 'file', 'files') : null, fmtDate(p.createdAt)].filter(Boolean).join(' · ') }),
         tickers.length ? el('div', { class:'j-tickers', text: tickers.slice(0, 8).join('  ') + (tickers.length > 8 ? `  +${tickers.length - 8}` : '') }) : null),
       moreBtn(()=> journalMenu(p), 'Journal options'));
   }
@@ -2035,13 +2529,23 @@
     const trail = [{ label:'Library', view:{ type:'library' } }];
     if(folder) trail.push({ label:folder.name, view:{ type:'folder', id:folder.id } });
     mainEl.appendChild(crumbs(trail));
-    mainEl.appendChild(headerBlock(page.name, plural(entries.length, 'entry', 'entries') + (folder ? ' · ' + folder.name : ''), [
+    const nFiles = filesOf(page.id).length;
+    mainEl.appendChild(headerBlock(page.name, [plural(entries.length, 'entry', 'entries'), nFiles ? plural(nFiles, 'file', 'files') : null, folder ? folder.name : null].filter(Boolean).join(' · '), [
       actionBtn('Rename', 'edit', ()=> renameJournal(page)),
       actionBtn('Compare', 'compare', ()=> compareWith(page)),
       actionBtn('', 'more', ()=> uiMenu(page.name, [
+        { label:'Add file', value:'file', icon:'clip' },
         { label:'Move to folder', value:'move', icon:'move' },
         { label:'Delete journal', value:'delete', icon:'trash', danger:true },
-      ]).then(v => { if(v === 'move') return moveJournal(page); if(v === 'delete') return deleteJournal(page); }), 'icon-only', 'Journal options'),
+      ]).then(v => {
+        if(v === 'file'){
+          const inp = mainEl.querySelector('[data-role=file-input]');
+          if(inp){ try{ inp.closest('.files').scrollIntoView({ behavior:'smooth', block:'center' }); }catch(e){} inp.click(); }
+          return;
+        }
+        if(v === 'move') return moveJournal(page);
+        if(v === 'delete') return deleteJournal(page);
+      }), 'icon-only', 'Journal options'),
     ]));
 
     if(!formOpen){
@@ -2070,6 +2574,7 @@
       entries.forEach(entry => ledger.appendChild(buildStockRow(page.id, entry)));
     }
     mainEl.appendChild(ledger);
+    mainEl.appendChild(filesSection(page));
   }
 
   function renderCompare(){
@@ -2131,6 +2636,7 @@
     if(view.type === 'journal'){ const p = pageById(view.id); if(p) return renderJournal(p); }
     if(view.type === 'folder'){ const f = folderById(view.id); if(f) return renderFolder(f); }
     if(view.type === 'compare') return renderCompare();
+    if(view.type === 'quick') return renderQuick();
     return renderLibrary();
   }
 
@@ -2140,6 +2646,7 @@
   }
 
   async function generatePdf(){
+    if(view.type === 'quick'){ quickPdf(); return; }
     const btn = document.getElementById('pdfBtn');
     const originalLabel = btn.textContent;
     btn.textContent = 'Generating…';
@@ -2199,6 +2706,17 @@
         doc.setDrawColor(200);
         doc.line(marginX, y, pageWidth - marginX, y);
         y += 22;
+
+        const attached = filesOf(page.id);
+        if(attached.length){
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(110);
+          doc.splitTextToSize('Files: ' + attached.map(m => m.name).join(', '), pageWidth - marginX * 2)
+             .forEach(line => { ensureSpace(14); doc.text(line, marginX, y); y += 12; });
+          doc.setTextColor(0);
+          y += 10;
+        }
 
         if(entries.length === 0){
           doc.setFont('helvetica', 'italic');
@@ -2297,6 +2815,8 @@
     }
     if(changed) await savePages();
     for(const p of pages){ await loadEntries(p.id); }
+    await loadFileMeta();
+    loadQuickTickers();
 
     // Reopen where you left off (or the Library on first run)
     let start = location.hash;
