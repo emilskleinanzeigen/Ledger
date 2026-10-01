@@ -890,6 +890,56 @@
     .q-open{ width:96px; }
   }
 
+  /* ---------- RUBBERBAND MODEL ---------- */
+  .rb-card{ border:1px solid var(--line); border-radius:12px; background:var(--panel); margin-bottom:14px; overflow:hidden; }
+  .rb-head{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    padding:13px 16px; border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+  }
+  .rb-ticker{ font-family:'Fraunces', serif; font-size:18px; font-weight:600; }
+  .rb-base{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--muted); text-align:right; line-height:1.5; }
+  .rb-base b{ color:var(--paper); font-weight:500; font-size:12.5px; }
+  .rb-body{ padding:12px 16px 16px; }
+  .rb-target{ font-size:12px; color:var(--muted); }
+  .rb-target b{ color:var(--paper); font-weight:500; }
+  .rb-viz{ position:relative; height:36px; margin:10px 4px 2px; }
+  .rb-track{ position:absolute; left:0; right:0; top:15px; height:6px; border-radius:3px; background:rgba(255,255,255,0.05); }
+  .rb-b90{ position:absolute; top:12px; height:12px; border-radius:6px; background:rgba(201,203,210,0.14); border:1px solid rgba(201,203,210,0.25); box-sizing:border-box; }
+  .rb-b68{ position:absolute; top:10px; height:16px; border-radius:8px; background:linear-gradient(90deg, #7d7f86, #eceef1 50%, #7d7f86); opacity:0.92; }
+  .rb-centre{ position:absolute; top:5px; width:2px; height:26px; margin-left:-1px; border-radius:1px; background:#fff; box-shadow:0 0 0 2px rgba(0,0,0,0.45); }
+  .rb-mark{ position:absolute; top:12px; width:12px; height:12px; margin-left:-6px; border-radius:50%; }
+  .rb-mark.last{ border:2px solid var(--silver-hi); background:var(--bg); box-sizing:border-box; }
+  .rb-mark.open{ width:10px; height:10px; margin-left:-5px; top:13px; border-radius:2px; transform:rotate(45deg); background:var(--gold); border:1.5px solid var(--bg); }
+  .rb-mark.hit{ background:var(--sage); box-shadow:0 0 0 3px rgba(116,171,142,0.28); }
+  .rb-mark.miss{ background:var(--rust); box-shadow:0 0 0 3px rgba(193,101,79,0.28); }
+  .rb-legend{ display:flex; flex-wrap:wrap; gap:6px 14px; font-size:10.5px; color:var(--muted); margin:6px 0 6px; }
+  .rb-legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .rb-legend i{ display:inline-block; width:9px; height:9px; border-radius:50%; }
+  .rb-legend i.last{ border:1.5px solid var(--silver-hi); }
+  .rb-legend i.open{ border-radius:1px; transform:rotate(45deg); width:7px; height:7px; background:var(--gold); }
+  .rb-legend i.b68{ border-radius:3px; width:14px; height:7px; background:linear-gradient(90deg, #7d7f86, #eceef1 50%, #7d7f86); }
+  .rb-legend i.b90{ border-radius:3px; width:14px; height:7px; background:rgba(201,203,210,0.18); border:1px solid rgba(201,203,210,0.3); }
+  .rb-rows{ width:100%; border-collapse:collapse; font-family:'IBM Plex Mono', monospace; font-size:12.5px; }
+  .rb-rows td{ padding:8px 0; border-top:1px solid rgba(255,255,255,0.045); vertical-align:top; }
+  .rb-rows td:first-child{ color:var(--muted); font-family:'Inter', sans-serif; font-size:12px; padding-right:12px; }
+  .rb-rows td:last-child{ text-align:right; color:var(--paper); }
+  .rb-rows .sub{ display:block; font-size:10.5px; color:var(--muted); margin-top:2px; }
+  .rb-rows .ok{ color:var(--sage); }
+  .rb-rows .bad{ color:var(--rust); }
+  .rb-rows .mid{ color:var(--gold); }
+  .rb-section{ font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); font-weight:600; margin:16px 0 2px; }
+  .rb-open{ display:flex; align-items:center; flex-wrap:wrap; gap:8px 10px; margin-top:12px; font-size:12px; color:var(--muted); }
+  .rb-open input{
+    width:110px; background:var(--bg); border:1px solid var(--line); border-radius:7px;
+    color:var(--paper); font-family:'IBM Plex Mono', monospace; font-size:13px;
+    padding:7px 9px; text-align:right; outline:none;
+  }
+  .rb-open input:focus{ border-color:var(--gold); }
+  .rb-err{ padding:14px 16px; color:var(--rust); font-size:12.5px; line-height:1.5; }
+  .seg button[data-h]{ flex:1 1 0; font-family:'IBM Plex Mono', monospace; font-size:13px; }
+  .rb-note{ font-size:11.5px; color:var(--muted); line-height:1.6; margin:4px 2px 20px; }
+
   /* ---------- GREETING (shown on every app launch) ---------- */
   #greet{
     position:fixed; inset:0; z-index:100;
@@ -1101,6 +1151,7 @@
     download: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7 10.5l5 5 5-5M5 20h14"/></svg>',
     copy: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>',
     share: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v6.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V12"/></svg>',
+    band: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14M21 5v14"/><path d="M3 12c3-5.5 6-5.5 9 0s6 5.5 9 0"/></svg>',
     file: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>',
   };
 
@@ -1637,6 +1688,348 @@
         actionBtn('Copy as text', 'copy', copyQuick))));
   }
 
+  /* ---------- RUBBERBAND MODEL (port of rubberband.py, model v6) ---------- */
+  // Calibrated constants — copied unchanged from rubberband.py
+  const RB_DRIFT_PER_DAY = 1.00124;
+  const RB_V6_WINDOWS = [10, 20, 60];
+  const RB_V6_K = { 68: [0.916, 0.943, 0.961, 0.976, 0.978], 90: [1.673, 1.711, 1.724, 1.742, 1.750] };
+  const RB_V4_WINDOWS = [5, 20];
+  const RB_SWING_WINDOWS = [10, 20, 60];
+  const RB_SWING = { intercept:0.31, J:0.65, G:0.29, R:0.50, S:-0.26, low:0.76, high:1.28 };
+
+  function rbStd(xs){                         // sample standard deviation (ddof = 1), like pandas
+    const n = xs.length;
+    if(n < 2) return NaN;
+    let m = 0; for(const x of xs) m += x; m /= n;
+    let s = 0; for(const x of xs) s += (x - m) * (x - m);
+    return Math.sqrt(s / (n - 1));
+  }
+  function rbBlend(series, windows, extra){   // mean of the rolling std at the most recent row
+    const needed = Math.max(...windows) + 1;
+    const usable = series.length + (extra || 0);
+    if(usable < needed) throw new Error(`needs at least ${needed} sessions of price history, got ${usable}`);
+    return windows.reduce((s, w) => s + rbStd(series.slice(-w)), 0) / windows.length;
+  }
+  const rbCloseToClose = hist => hist.slice(1).map((b, i) => b.close / hist[i].close - 1);
+  const rbOpenToClose = hist => hist.map(b => b.close / b.open - 1);
+
+  function rbBandV6(hist, days, level){
+    const sigma = rbBlend(rbCloseToClose(hist), RB_V6_WINDOWS, 1);
+    const k = RB_V6_K[level][days - 1];
+    const half = k * sigma * Math.sqrt(days);
+    const last = hist[hist.length - 1].close;
+    const centre = last * Math.pow(RB_DRIFT_PER_DAY, days);
+    return { centre, lower: centre * (1 - half), upper: centre * (1 + half), half, sigma, k, last };
+  }
+  function rbBandV4Open(hist, open){
+    const sigma = rbBlend(rbOpenToClose(hist), RB_V4_WINDOWS, 1);
+    return { centre: open, lower: open * (1 - sigma), upper: open * (1 + sigma), half: sigma, sigma };
+  }
+  function rbSwing(hist, open){
+    const y = hist[hist.length - 1];
+    const j = rbBlend(rbOpenToClose(hist).map(x => x * 100), RB_SWING_WINDOWS, 1);
+    const g = Math.abs(open / y.close - 1) * 100;
+    const r = (y.high - y.low) / y.open * 100;
+    const s = Math.abs(y.close / y.open - 1) * 100;
+    const swing = RB_SWING.intercept + RB_SWING.J * j + RB_SWING.G * g + RB_SWING.R * r + RB_SWING.S * s;
+    return { swing, low: RB_SWING.low * swing, high: RB_SWING.high * swing, J: j, G: g, R: r, S: s };
+  }
+
+  // Market clock (New York) — decides which session a journal entry belongs to
+  function nyParts(ts){
+    const f = new Intl.DateTimeFormat('en-CA', { timeZone:'America/New_York', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hourCycle:'h23', weekday:'short' });
+    const p = {};
+    f.formatToParts(new Date(ts)).forEach(x => { p[x.type] = x.value; });
+    const hour = parseInt(p.hour, 10) % 24;
+    return { date: `${p.year}-${p.month}-${p.day}`, minutes: hour * 60 + parseInt(p.minute, 10), weekday: p.weekday };
+  }
+  const RB_OPEN_MIN = 9 * 60 + 30, RB_CLOSE_MIN = 16 * 60;
+  function rbBarComplete(date, now){ return date < now.date || (date === now.date && now.minutes >= RB_CLOSE_MIN); }
+  function rbEntrySession(addedAt){
+    const p = nyParts(addedAt || Date.now());
+    const weekend = p.weekday === 'Sat' || p.weekday === 'Sun';
+    if(!weekend && p.minutes < RB_OPEN_MIN) return { date:p.date, strictlyBefore:true, live:false };   // before the bell: last session = previous day
+    if(!weekend && p.minutes < RB_CLOSE_MIN) return { date:p.date, strictlyBefore:true, live:true };   // during the session: today's open is known
+    return { date:p.date, strictlyBefore:false, live:false };                                           // after the close / weekend
+  }
+  function rbNextWeekday(dateStr, n){
+    const d = new Date(dateStr + 'T12:00:00Z');
+    let left = n;
+    while(left > 0){ d.setUTCDate(d.getUTCDate() + 1); const w = d.getUTCDay(); if(w !== 0 && w !== 6) left--; }
+    return d.toISOString().slice(0, 10);
+  }
+  function rbDay(dateStr){ return new Date(dateStr + 'T12:00:00').toLocaleDateString(undefined, { weekday:'short', month:'short', day:'numeric' }); }
+
+  // One ticker: everything the screen shows
+  function rbCompute(ticker, bars, entry, horizon, opts = {}){
+    const now = nyParts(opts.now || Date.now());
+    const S = rbEntrySession(entry && entry.addedAt);
+    let bi = -1;
+    for(let i = bars.length - 1; i >= 0; i--){
+      if(S.strictlyBefore ? bars[i].date < S.date : bars[i].date <= S.date){ bi = i; break; }
+    }
+    while(bi >= 0 && !rbBarComplete(bars[bi].date, now)) bi--;
+    if(bi < 0) throw new Error('No completed session found before this journal’s date.');
+    const hist = bars.slice(0, bi + 1);
+    const base = hist[hist.length - 1];
+    const b68 = rbBandV6(hist, horizon, 68), b90 = rbBandV6(hist, horizon, 90);
+    const it = { ticker, horizon, base:{ date: base.date, close: base.close, sessions: hist.length }, centre: b68.centre, sigma: b68.sigma, b68, b90 };
+
+    const tgt = bars[bi + horizon];
+    it.target = tgt ? { date: tgt.date, complete: rbBarComplete(tgt.date, now), estimated:false }
+                    : { date: rbNextWeekday(base.date, horizon), complete:false, estimated:true };
+    if(tgt && it.target.complete){
+      const c = tgt.close;
+      it.actual = { close:c, z: (c - b68.centre) / (b68.centre * b68.half),
+                    in68: c >= b68.lower && c <= b68.upper, in90: c >= b90.lower && c <= b90.upper };
+    }
+
+    if(horizon === 1){
+      const next = bars[bi + 1];
+      let open = null, source = null;
+      if(opts.typedOpen !== undefined && opts.typedOpen !== null && isFinite(opts.typedOpen)){ open = opts.typedOpen; source = 'typed'; }
+      else if(next && isFinite(next.open)){ open = next.open; source = it.target.complete ? 'actual' : 'live'; }
+      else if(S.live && entry && entry.price && num(entry.price.open) !== null){ open = entry.price.open; source = 'journal'; }
+      else if(opts.quickRow && num(opts.quickRow.open) !== null && opts.quickRow.date && opts.quickRow.date > base.date){ open = opts.quickRow.open; source = 'quick'; }
+      if(open !== null && open > 0){
+        it.open = { value: open, source };
+        try{
+          it.v4open = rbBandV4Open(hist, open);
+          if(it.actual) it.v4open.inBand = it.actual.close >= it.v4open.lower && it.actual.close <= it.v4open.upper;
+        }catch(e){ it.v4openError = e.message; }
+        try{
+          const sw = rbSwing(hist, open);
+          if(isFinite(sw.swing)){
+            it.swing = sw;
+            if(tgt && it.target.complete && isFinite(tgt.high) && isFinite(tgt.low)){
+              it.swing.actual = (tgt.high - tgt.low) / tgt.open * 100;
+              it.swing.inRange = it.swing.actual >= sw.low && it.swing.actual <= sw.high;
+            }
+          }
+        }catch(e){ it.swingError = e.message; }
+      }
+    }
+    return it;
+  }
+
+  const rb = { journalId:null, horizon:1, loading:false, status:'', statusKind:'', results:null, cache:{}, opens:{} };
+
+  function rbStatus(msg, kind){
+    rb.status = msg || ''; rb.statusKind = kind || '';
+    const s = document.getElementById('rbStatus');
+    if(s){ s.textContent = rb.status; s.className = 'q-status' + (rb.statusKind ? ' ' + rb.statusKind : ''); }
+  }
+  function keepScroll(fn){ const st = mainEl.scrollTop; return Promise.resolve(fn()).then(()=>{ mainEl.scrollTop = st; }); }
+  async function copyText(text){
+    try{ await navigator.clipboard.writeText(text); showToast('Copied to clipboard', 'ok'); }
+    catch(e){
+      const ta = el('textarea', { style:'position:fixed;top:0;left:0;opacity:0' });
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      let ok = false; try{ ok = document.execCommand('copy'); }catch(_){}
+      ta.remove();
+      showToast(ok ? 'Copied to clipboard' : 'Copying isn’t available here', ok ? 'ok' : null);
+    }
+  }
+  async function fetchHistoryBatch(chunk, key){
+    const url = 'https://api.twelvedata.com/time_series?symbol=' + encodeURIComponent(chunk.join(','))
+      + '&interval=1day&outputsize=400&apikey=' + encodeURIComponent(key);
+    let data;
+    try{ const res = await fetch(url); data = await res.json(); }
+    catch(e){ throw new Error('Couldn’t reach the data service. Check your internet connection.'); }
+    if(!data) throw new Error('No data returned.');
+    const single = chunk.length === 1;
+    if(data.status === 'error' && (!single || [401, 403, 429].includes(data.code))) throw new Error(shortMsg(data.message || 'The data service returned an error.'));
+    const out = {};
+    chunk.forEach(sym => {
+      const d = single ? data : data[sym];
+      if(!d || d.status === 'error' || !Array.isArray(d.values)){ out[sym] = { error: d && d.message ? shortMsg(d.message, 80) : 'No data for this ticker.' }; return; }
+      const bars = d.values.map(v => ({ date: String(v.datetime).slice(0, 10), open: parseFloat(v.open), high: parseFloat(v.high), low: parseFloat(v.low), close: parseFloat(v.close) }))
+        .filter(b => isFinite(b.open) && isFinite(b.close) && b.open > 0 && b.close > 0)
+        .sort((a, b) => a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
+      out[sym] = { bars };
+    });
+    return out;
+  }
+  function rbRecompute(){
+    if(!rb.results) return;
+    const page = pageById(rb.results.journalId);
+    if(!page){ rb.results = null; return; }
+    const latest = latestByTicker(entriesCache[page.id]);
+    rb.results.items = rb.results.tickers.map(t => {
+      const c = rb.cache[t];
+      if(!c) return { ticker:t, error:'No price data loaded yet — tap Predict.' };
+      if(c.error) return { ticker:t, error:c.error };
+      try{ return rbCompute(t, c.bars, latest.get(t), rb.horizon, { typedOpen: rb.opens[t], quickRow: quick.rows[t] }); }
+      catch(e){ return { ticker:t, error:e.message }; }
+    });
+  }
+  async function rbPredict(){
+    if(rb.loading) return;
+    const page = rb.journalId ? pageById(rb.journalId) : null;
+    if(!page){ rbStatus('Choose a journal first.', 'err'); return; }
+    const tickers = [...latestByTicker(entriesCache[page.id]).keys()].sort();
+    if(!tickers.length){ rbStatus('This journal has no stocks yet.', 'err'); return; }
+    const key = await ensureApiKey();
+    if(!key){ rbStatus('An API key is needed to load price history.', 'err'); return; }
+    rb.loading = true;
+    rb.status = `Loading price history for ${plural(tickers.length, 'stock', 'stocks')}…`; rb.statusKind = '';
+    if(view.type === 'rubberband') renderMain();
+    try{
+      for(let i = 0; i < tickers.length; i += 8){                 // free plan: 8 tickers per minute
+        if(i > 0){
+          for(let s = 61; s > 0; s--){ rbStatus(`Free plan limit — next ${Math.min(8, tickers.length - i)} in ${s}s…`); await new Promise(r => setTimeout(r, 1000)); }
+          rbStatus('Loading price history…');
+        }
+        Object.assign(rb.cache, await fetchHistoryBatch(tickers.slice(i, i + 8), key));
+      }
+      rb.results = { journalId: page.id, tickers, items: [] };
+      rbRecompute();
+      const ok = rb.results.items.filter(x => !x.error).length;
+      rb.status = `✓ Predicted ${ok} of ${plural(tickers.length, 'stock', 'stocks')}.`;
+      rb.statusKind = ok ? 'ok' : 'err';
+    }catch(e){
+      rb.status = 'Couldn’t load prices: ' + e.message; rb.statusKind = 'err';
+    }finally{
+      rb.loading = false;
+      if(view.type === 'rubberband') renderMain();
+    }
+  }
+
+  const rbPrice = v => Number(v).toFixed(2);
+  const rbPct = v => (v * 100).toFixed(2) + '%';
+  const RB_OPEN_SOURCE = { typed:'entered by you', actual:'actual open', live:'today’s open (live)', journal:'from the journal', quick:'from Quick sheet' };
+
+  function rbViz(it){
+    const pts = [it.b90.lower, it.b90.upper, it.base.close];
+    if(it.open) pts.push(it.open.value);
+    if(it.actual) pts.push(it.actual.close);
+    let lo = Math.min(...pts), hi = Math.max(...pts);
+    const pad = (hi - lo) * 0.06 || hi * 0.01; lo -= pad; hi += pad;
+    const x = v => ((v - lo) / (hi - lo) * 100);
+    const span = (a, b) => `left:${x(a).toFixed(2)}%;width:${(x(b) - x(a)).toFixed(2)}%`;
+    return el('div', { class:'rb-viz', 'aria-hidden':'true' },
+      el('div', { class:'rb-track' }),
+      el('div', { class:'rb-b90', style: span(it.b90.lower, it.b90.upper) }),
+      el('div', { class:'rb-b68', style: span(it.b68.lower, it.b68.upper) }),
+      el('div', { class:'rb-centre', style:`left:${x(it.centre).toFixed(2)}%` }),
+      el('div', { class:'rb-mark last', style:`left:${x(it.base.close).toFixed(2)}%` }),
+      it.open ? el('div', { class:'rb-mark open', style:`left:${x(it.open.value).toFixed(2)}%` }) : null,
+      it.actual ? el('div', { class:'rb-mark ' + (it.actual.in68 ? 'hit' : 'miss'), style:`left:${x(it.actual.close).toFixed(2)}%` }) : null);
+  }
+  function rbRow(label, value, sub, cls){
+    return el('tr', null, el('td', { text:label }), el('td', null, el('span', { class: cls || null, text:value }), sub ? el('span', { class:'sub', text:sub }) : null));
+  }
+  function rbCard(it){
+    if(it.error){
+      return el('div', { class:'rb-card', 'data-ticker': it.ticker },
+        el('div', { class:'rb-head' }, el('div', { class:'rb-ticker', text:it.ticker })),
+        el('div', { class:'rb-err', text: it.error }));
+    }
+    const card = el('div', { class:'rb-card', 'data-ticker': it.ticker },
+      el('div', { class:'rb-head' },
+        el('div', { class:'rb-ticker', text:it.ticker }),
+        el('div', { class:'rb-base' }, 'Last close · ' + rbDay(it.base.date), el('br'), el('b', { text: rbPrice(it.base.close) }))));
+    const body = el('div', { class:'rb-body' });
+    const when = it.horizon === 1 ? 'Forecast for the next session' : `Forecast ${it.horizon} sessions ahead`;
+    body.appendChild(el('div', { class:'rb-target' }, when + ' · ', el('b', { text: (it.target.estimated ? '≈ ' : '') + rbDay(it.target.date) })));
+    body.appendChild(rbViz(it));
+    body.appendChild(el('div', { class:'rb-legend' },
+      el('span', null, el('i', { class:'b68' }), '68%'), el('span', null, el('i', { class:'b90' }), '90%'),
+      el('span', null, el('i', { class:'last' }), 'last close'),
+      it.open ? el('span', null, el('i', { class:'open' }), 'open') : null,
+      it.actual ? el('span', null, el('i', { style:`background:var(--${it.actual.in68 ? 'sage' : 'rust'})` }), 'actual close') : null));
+
+    const rows = [
+      rbRow('68% band', `${rbPrice(it.b68.lower)} – ${rbPrice(it.b68.upper)}`, '±' + rbPct(it.b68.half)),
+      rbRow('90% band', `${rbPrice(it.b90.lower)} – ${rbPrice(it.b90.upper)}`, '±' + rbPct(it.b90.half)),
+      rbRow('Centre', rbPrice(it.centre), 'last close + typical drift'),
+    ];
+    if(it.actual){
+      const verdict = it.actual.in68 ? 'inside the 68% band' : it.actual.in90 ? 'outside 68%, inside 90%' : 'outside both bands';
+      rows.push(rbRow('Actual close', rbPrice(it.actual.close), `${verdict} · z ${it.actual.z >= 0 ? '+' : '−'}${Math.abs(it.actual.z).toFixed(2)}`,
+        it.actual.in68 ? 'ok' : it.actual.in90 ? 'mid' : 'bad'));
+    }
+    body.appendChild(el('table', { class:'rb-rows' }, el('tbody', null, rows)));
+
+    if(it.horizon === 1){
+      if(it.open){
+        const o = it.open.value;
+        const orow = [rbRow('Open', rbPrice(o), RB_OPEN_SOURCE[it.open.source] || '')];
+        if(it.v4open){
+          orow.push(rbRow('Band from the open', `${rbPrice(it.v4open.lower)} – ${rbPrice(it.v4open.upper)}`,
+            '±' + rbPct(it.v4open.half) + ' · v4-open' + (it.actual ? (it.v4open.inBand ? ' · close landed inside' : ' · close landed outside') : ''),
+            it.actual ? (it.v4open.inBand ? 'ok' : 'bad') : null));
+        }
+        if(it.swing){
+          const sw = it.swing;
+          orow.push(rbRow('Expected swing', sw.swing.toFixed(2) + '%', `usually ${sw.low.toFixed(2)}–${sw.high.toFixed(2)}% · ≈ ${rbPrice(o * sw.swing / 100)} high-to-low`));
+          if(sw.actual !== undefined) orow.push(rbRow('Actual swing', sw.actual.toFixed(2) + '%', sw.inRange ? 'within the usual range' : (sw.actual < sw.low ? 'calmer than usual' : 'wilder than usual'), sw.inRange ? 'ok' : 'mid'));
+        }
+        body.appendChild(el('div', { class:'rb-section', text:'From today’s open' }));
+        body.appendChild(el('table', { class:'rb-rows' }, el('tbody', null, orow)));
+      }
+      if(!it.target.complete){
+        const inp = el('input', { type:'number', step:'0.01', inputmode:'decimal', placeholder:'e.g. ' + rbPrice(it.base.close), 'aria-label': it.ticker + ' open' });
+        if(rb.opens[it.ticker] !== undefined && rb.opens[it.ticker] !== null) inp.value = String(rb.opens[it.ticker]);
+        const apply = ()=>{
+          const v = numOrNull(inp.value);
+          if(v === (rb.opens[it.ticker] ?? null)) return;          // nothing changed (e.g. blur right after Enter)
+          rb.opens[it.ticker] = v;
+          rbRecompute();
+          setTimeout(()=> keepScroll(renderMain), 0);              // let the input finish its events first
+        };
+        inp.addEventListener('change', apply);
+        inp.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); apply(); } });
+        body.appendChild(el('div', { class:'rb-open' },
+          el('span', { text: it.open ? 'Different open?' : 'Know today’s open?' }), inp,
+          el('span', { text:'adds the band from the open and the expected swing' })));
+      }
+    }
+    card.appendChild(body);
+    return card;
+  }
+  function rbText(){
+    const page = rb.results ? pageById(rb.results.journalId) : null;
+    const when = rb.horizon === 1 ? 'next session' : `${rb.horizon} sessions ahead`;
+    const lines = [`Rubberband v6 — ${page ? page.name : 'journal'} — ${when}`];
+    (rb.results ? rb.results.items : []).forEach(it => {
+      if(it.error){ lines.push(`${it.ticker}: ${it.error}`); return; }
+      lines.push(`${it.ticker} (close ${rbDay(it.base.date)}: ${rbPrice(it.base.close)}) → 68%: ${rbPrice(it.b68.lower)}–${rbPrice(it.b68.upper)} (±${rbPct(it.b68.half)}) | 90%: ${rbPrice(it.b90.lower)}–${rbPrice(it.b90.upper)} (±${rbPct(it.b90.half)})`);
+      if(it.open && it.v4open) lines.push(`   open ${rbPrice(it.open.value)} → ${rbPrice(it.v4open.lower)}–${rbPrice(it.v4open.upper)}` + (it.swing ? ` · swing ${it.swing.swing.toFixed(2)}% (${it.swing.low.toFixed(2)}–${it.swing.high.toFixed(2)}%)` : ''));
+      if(it.actual) lines.push(`   actual ${rbPrice(it.actual.close)} — ${it.actual.in68 ? 'inside 68%' : it.actual.in90 ? 'inside 90%' : 'outside'} (z ${it.actual.z.toFixed(2)})`);
+    });
+    return lines.join('\n');
+  }
+  function renderRubberband(){
+    if((view.j || null) !== rb.journalId){ rb.journalId = view.j || null; rb.results = null; rb.status = ''; rb.statusKind = ''; rb.opens = {}; }
+    const page = rb.journalId ? pageById(rb.journalId) : null;
+    mainEl.appendChild(headerBlock('Rubberband Model', 'Forecast bands and expected swing · model v6', []));
+
+    const tickers = page ? [...latestByTicker(entriesCache[page.id]).keys()].sort() : [];
+    const f = page && page.folderId ? folderById(page.folderId) : null;
+    const slot = el('button', { class:'cmp-slot' + (page ? '' : ' empty'), type:'button', 'data-role':'rb-journal', onclick: async ()=>{
+        const id = await uiPickJournal('Choose a journal', null);
+        if(id) go({ type:'rubberband', j:id }, true);
+      }},
+      el('div', { class:'s-tag', text:'Journal' }),
+      el('div', { class:'s-name', text: page ? page.name : 'Tap to choose' }),
+      el('div', { class:'s-meta', text: page ? `${f ? f.name : 'Library'} · ${tickers.length ? tickers.join('  ') : 'no stocks yet'}` : 'its stocks and date go into the model' }));
+    const seg = el('div', { class:'seg', role:'tablist', 'aria-label':'Forecast horizon' }, [1, 2, 3, 4, 5].map(n =>
+      el('button', { class: rb.horizon === n ? 'on' : null, type:'button', role:'tab', 'data-h': String(n), 'aria-selected': rb.horizon === n ? 'true' : 'false',
+        text: String(n), title: n === 1 ? 'Next session' : `${n} sessions ahead`, onclick: ()=>{ rb.horizon = n; rbRecompute(); keepScroll(renderMain); } })));
+    mainEl.appendChild(el('div', { class:'q-card' },
+      slot,
+      el('div', { class:'q-label', style:'margin-top:18px', text:'Sessions ahead' }), seg,
+      el('div', { class:'q-actions' },
+        el('button', { class:'page-action primary', type:'button', 'data-role':'predict', disabled: rb.loading || !page, onclick: rbPredict },
+          icon('band'), el('span', { text: rb.loading ? 'Predicting…' : 'Predict' })),
+        rb.results && rb.results.items.some(x => !x.error) ? actionBtn('Copy as text', 'copy', ()=> copyText(rbText())) : null),
+      el('div', { id:'rbStatus', class:'q-status' + (rb.statusKind ? ' ' + rb.statusKind : ''), text: rb.status })));
+
+    if(rb.results && rb.results.journalId === rb.journalId) rb.results.items.forEach(it => mainEl.appendChild(rbCard(it)));
+    mainEl.appendChild(el('div', { class:'rb-note', text:'Model v6, calibrated on 4 years of daily data (Sep 2022 – Sep 2026, 33 tickers) during one semiconductor bull market. Known weakness: in calm markets the bands run a little narrow — about 63% of closes land inside the 68% band. These are statistical ranges, not guarantees.' }));
+  }
+
   /* ---------- LIBRARY ACTIONS ---------- */
   async function createFolder(){
     const name = await uiPrompt('New folder', '', { placeholder:'e.g. September, Tech stocks', confirm:'Create' });
@@ -1738,8 +2131,10 @@
       { label:'Rename', value:'rename', icon:'edit' },
       { label:'Move to folder', value:'move', icon:'move' },
       { label:'Compare with…', value:'compare', icon:'compare' },
+      { label:'Rubberband prediction', value:'rb', icon:'band' },
       { label:'Delete journal', value:'delete', icon:'trash', danger:true },
     ]).then(v => {
+      if(v === 'rb') return go({ type:'rubberband', j:p.id });
       if(v === 'rename') return renameJournal(p);
       if(v === 'move') return moveJournal(p);
       if(v === 'compare') return compareWith(p);
@@ -1763,14 +2158,16 @@
       return '#/compare' + (s ? '?' + s : '');
     }
     if(v.type === 'quick') return '#/quick';
+    if(v.type === 'rubberband') return '#/rubberband' + (v.j ? '?j=' + encodeURIComponent(v.j) : '');
     return '#/library';
   }
   function parseHash(hash){
-    const m = /^#\/(library|journal|folder|compare|quick)(?:\/([^?]+))?(?:\?(.*))?$/.exec(hash || '');
+    const m = /^#\/(library|journal|folder|compare|quick|rubberband)(?:\/([^?]+))?(?:\?(.*))?$/.exec(hash || '');
     if(!m) return null;
     if(m[1] === 'journal' || m[1] === 'folder') return m[2] ? { type:m[1], id: decodeURIComponent(m[2]) } : null;
     if(m[1] === 'compare'){ const q = new URLSearchParams(m[3] || ''); return { type:'compare', a:q.get('a'), b:q.get('b') }; }
     if(m[1] === 'quick') return { type:'quick' };
+    if(m[1] === 'rubberband'){ const q = new URLSearchParams(m[3] || ''); return { type:'rubberband', j: q.get('j') }; }
     return { type:'library' };
   }
   function normalizeView(v){
@@ -1778,6 +2175,7 @@
     if(v.type === 'journal' && !pageById(v.id)) return { type:'library' };
     if(v.type === 'folder' && !folderById(v.id)) return { type:'library' };
     if(v.type === 'compare') return { type:'compare', a: pageById(v.a) ? v.a : null, b: pageById(v.b) ? v.b : null };
+    if(v.type === 'rubberband') return { type:'rubberband', j: pageById(v.j) ? v.j : null };
     return v;
   }
   function go(v, replace){
@@ -1811,9 +2209,10 @@
     const navBtn = (key, label, ic, target, active) =>
       el('button', { class:'nav-item' + (active ? ' active' : ''), type:'button', 'data-nav':key, onclick: ()=> go(target) }, icon(ic), el('span', { text:label }));
     navEl.replaceChildren(
-      navBtn('library', 'Library', 'library', { type:'library' }, !['compare', 'quick'].includes(view.type)),
+      navBtn('library', 'Library', 'library', { type:'library' }, !['compare', 'quick', 'rubberband'].includes(view.type)),
       navBtn('compare', 'Compare', 'compare', { type:'compare', a:lastCompare.a, b:lastCompare.b }, view.type === 'compare'),
-      navBtn('quick', 'Quick sheet', 'bolt', { type:'quick' }, view.type === 'quick'));
+      navBtn('quick', 'Quick sheet', 'bolt', { type:'quick' }, view.type === 'quick'),
+      navBtn('rubberband', 'Rubberband Model', 'band', { type:'rubberband', j: rb.journalId }, view.type === 'rubberband'));
 
     const out = [];
     const fs = sortedFolders();
@@ -1839,6 +2238,10 @@
     if(loose.length) loose.forEach(p => out.push(treeJournal(p)));
     else out.push(el('div', { class:'tree-empty', text: fs.length ? 'None' : 'No journals yet' }));
     treeEl.replaceChildren(...out);
+    const activeNav = navEl.querySelector('.nav-item.active');
+    if(activeNav && navEl.scrollWidth > navEl.clientWidth){
+      try{ navEl.scrollLeft = Math.max(0, activeNav.offsetLeft - (navEl.clientWidth - activeNav.offsetWidth) / 2); }catch(e){}
+    }
   }
   function treeJournal(p){
     const n = entryCount(p.id);
@@ -2536,8 +2939,10 @@
       actionBtn('', 'more', ()=> uiMenu(page.name, [
         { label:'Add file', value:'file', icon:'clip' },
         { label:'Move to folder', value:'move', icon:'move' },
+        { label:'Rubberband prediction', value:'rb', icon:'band' },
         { label:'Delete journal', value:'delete', icon:'trash', danger:true },
       ]).then(v => {
+        if(v === 'rb') return go({ type:'rubberband', j:page.id });
         if(v === 'file'){
           const inp = mainEl.querySelector('[data-role=file-input]');
           if(inp){ try{ inp.closest('.files').scrollIntoView({ behavior:'smooth', block:'center' }); }catch(e){} inp.click(); }
@@ -2637,6 +3042,7 @@
     if(view.type === 'folder'){ const f = folderById(view.id); if(f) return renderFolder(f); }
     if(view.type === 'compare') return renderCompare();
     if(view.type === 'quick') return renderQuick();
+    if(view.type === 'rubberband') return renderRubberband();
     return renderLibrary();
   }
 
